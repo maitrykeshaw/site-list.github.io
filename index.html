@@ -49,6 +49,14 @@
       letter-spacing: 0.5px;
     }
 
+    .under-building-title {
+      color: #ff9800;
+      margin-top: 28px;
+      font-size: 1.22rem;
+      text-align: center;
+      letter-spacing: 0.2px;
+    }
+
     .toggle-row {
       display: flex;
       justify-content: center;
@@ -218,7 +226,6 @@
       border: 1.5px solid #32c671bb;
     }
 
-    /* Dev Mode Copied Button Color */
     .copy-btn.dev-copied {
       color: #ff8c00 !important;
       background: #fff5e1 !important;
@@ -366,6 +373,10 @@
         height: 16px;
         width: 16px;
       }
+
+      .under-building-title {
+        font-size: 1.07rem;
+      }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
@@ -386,6 +397,9 @@
       </div>
     </div>
     <ul class="site-list" id="siteList"></ul>
+
+    <h2 class="under-building-title">Under Building</h2>
+    <ul class="site-list" id="underBuildingList"></ul>
   </div>
   <div id="modalBackdrop" class="modal-backdrop"></div>
   <div id="modalImgBox" class="modal-img-box">
@@ -394,6 +408,7 @@
     <div class="modal-url" id="modalUrl"></div>
   </div>
   <script>
+    // ---- Your working sites ----
     const websites = [
       "https://buyrestolin.vercel.app/",
       "https://endopump.vercel.app/",
@@ -457,6 +472,28 @@
       "https://buy-fungosem.vercel.app/"
     ];
 
+    // ---- Your under building sites ----
+    const underBuildingSites = [
+      "https://balmorex-pro.vercel.app/",
+      "https://breathe-lungreset.vercel.app/",
+      "https://get-femipro.vercel.app/",
+      "https://buy-gluco6.vercel.app/",
+      "https://glucoberry.vercel.app/",
+      "https://buy-glucoextend.vercel.app/",
+      "https://glucotonic.vercel.app/",
+      "https://buy-igenics.vercel.app/",
+      "https://memorybreath.vercel.app/",
+      "https://buy-naganotonic.vercel.app/",
+      "https://get-nanodefense-pro.vercel.app/",
+      "https://nervefresh.vercel.app/",
+      "https://pinealxt.vercel.app/",
+      "https://buy-primebiome.vercel.app/",
+      "https://pro-nailcomplex.vercel.app/",
+      "https://buy-provadent.vercel.app/",
+      "https://the-wealthsignal.vercel.app/",
+      "https://yusleep.vercel.app/"
+    ];
+
     // Keep track of copied URLs and their copy mode (normal/dev)
     const copiedUrls = new Map();
 
@@ -474,7 +511,6 @@
       });
     });
 
-    // Chhota icon
     function getFaviconUrl(siteUrl) {
       try {
         const url = new URL(siteUrl);
@@ -483,7 +519,6 @@
         return "";
       }
     }
-    // Bada icon
     function getBigFaviconUrl(siteUrl) {
       try {
         const url = new URL(siteUrl);
@@ -493,90 +528,95 @@
       }
     }
     const DEFAULT_ICON = "data:image/svg+xml,%3Csvg width='128' height='128' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='128' height='128' fill='%23ddd'/%3E%3Ctext x='64' y='96' font-size='72' text-anchor='middle' fill='%23999'%3E🌐%3C/text%3E%3C/svg%3E";
-    const siteList = document.getElementById('siteList');
-    websites.forEach(url => {
-      const li = document.createElement('li');
-      li.className = 'site-item';
 
-      // Double click anywhere on item to open url in new window
-      li.addEventListener('dblclick', function (e) {
-        if (e.target.closest(".copy-btn")) return;
-        window.open(url, '_blank');
-      });
+    function addSitesToList(sitesArray, siteListElem) {
+      sitesArray.forEach(url => {
+        const li = document.createElement('li');
+        li.className = 'site-item';
 
-      const urlBox = document.createElement('div');
-      urlBox.className = 'site-url-box';
+        // Double click to open new tab
+        li.addEventListener('dblclick', function (e) {
+          if (e.target.closest(".copy-btn")) return;
+          window.open(url, '_blank');
+        });
 
-      const favicon = document.createElement('img');
-      favicon.className = 'site-favicon';
-      favicon.src = getFaviconUrl(url);
-      favicon.alt = "icon";
-      favicon.loading = "lazy";
-      favicon.onerror = function () {
-        this.onerror = null;
-        this.src = DEFAULT_ICON;
-      };
+        const urlBox = document.createElement('div');
+        urlBox.className = 'site-url-box';
 
-      favicon.style.cursor = "pointer";
-      favicon.title = "Bada image dekhne ke liye click karo";
-      favicon.addEventListener('click', function (e) {
-        e.preventDefault();
-        showFaviconModal(getBigFaviconUrl(url), url);
-      });
+        const favicon = document.createElement('img');
+        favicon.className = 'site-favicon';
+        favicon.src = getFaviconUrl(url);
+        favicon.alt = "icon";
+        favicon.loading = "lazy";
+        favicon.onerror = function () {
+          this.onerror = null;
+          this.src = DEFAULT_ICON;
+        };
 
-      const span = document.createElement('span');
-      span.className = 'site-url';
-      span.textContent = url;
+        favicon.style.cursor = "pointer";
+        favicon.title = "Bada image dekhne ke liye click karo";
+        favicon.addEventListener('click', function (e) {
+          e.preventDefault();
+          showFaviconModal(getBigFaviconUrl(url), url);
+        });
 
-      urlBox.appendChild(favicon);
-      urlBox.appendChild(span);
+        const span = document.createElement('span');
+        span.className = 'site-url';
+        span.textContent = url;
 
-      const btn = document.createElement('button');
-      btn.className = 'copy-btn';
-      btn.title = 'Copy URL';
-      btn.innerHTML = `<span class="material-symbols-outlined">content_copy</span>`;
+        urlBox.appendChild(favicon);
+        urlBox.appendChild(span);
 
-      // Show effect if already copied, and which mode
-      if (copiedUrls.has(url)) {
-        if (copiedUrls.get(url) === "dev") {
-          btn.classList.add("dev-copied");
-          btn.title = "Copied as site:[url]!";
-        } else {
-          btn.classList.add("copied");
-          btn.title = "Copied!";
-        }
-      }
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.title = 'Copy URL';
+        btn.innerHTML = `<span class="material-symbols-outlined">content_copy</span>`;
 
-      btn.onclick = async () => {
-        try {
-          let copyText = url;
-          let isDevMode = siteModeOn;
-          if (isDevMode) {
-            copyText = `site:${url}`;
-          }
-          await navigator.clipboard.writeText(copyText);
-          copiedUrls.set(url, isDevMode ? "dev" : "normal");
-          // Remove all effect classes first
-          btn.classList.remove("copied", "dev-copied");
-          // Add the correct one
-          if (isDevMode) {
+        // Show effect if already copied, and which mode
+        if (copiedUrls.has(url)) {
+          if (copiedUrls.get(url) === "dev") {
             btn.classList.add("dev-copied");
             btn.title = "Copied as site:[url]!";
           } else {
             btn.classList.add("copied");
             btn.title = "Copied!";
           }
-        } catch (err) {
-          alert("Copy failed! " + err);
         }
-      };
 
-      li.appendChild(urlBox);
-      li.appendChild(btn);
-      siteList.appendChild(li);
-    });
+        btn.onclick = async () => {
+          try {
+            let copyText = url;
+            let isDevMode = siteModeOn;
+            if (isDevMode) {
+              copyText = `site:${url}`;
+            }
+            await navigator.clipboard.writeText(copyText);
+            copiedUrls.set(url, isDevMode ? "dev" : "normal");
+            btn.classList.remove("copied", "dev-copied");
+            if (isDevMode) {
+              btn.classList.add("dev-copied");
+              btn.title = "Copied as site:[url]!";
+            } else {
+              btn.classList.add("copied");
+              btn.title = "Copied!";
+            }
+          } catch (err) {
+            alert("Copy failed! " + err);
+          }
+        };
 
-    // Modal logic
+        li.appendChild(urlBox);
+        li.appendChild(btn);
+        siteListElem.appendChild(li);
+      });
+    }
+
+    // Add working sites to first list
+    addSitesToList(websites, document.getElementById('siteList'));
+    // Add under building sites to second list
+    addSitesToList(underBuildingSites, document.getElementById('underBuildingList'));
+
+    // Modal logic (same as before)
     const modalBackdrop = document.getElementById('modalBackdrop');
     const modalBox = document.getElementById('modalImgBox');
     const modalImg = document.getElementById('bigFavicon');
