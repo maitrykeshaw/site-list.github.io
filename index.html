@@ -85,9 +85,11 @@
       box-shadow: 0 1px 4px rgba(80, 72, 229, 0.05);
       min-width: 0;
       flex: 1 1 auto;
-      text-decoration: none;
+      text-decoration: underline;
+      cursor: pointer;
       transition: background .2s, color .2s;
       display: inline-block;
+      user-select: text;
     }
 
     .site-url:hover {
@@ -129,7 +131,6 @@
       color: #32c671;
     }
 
-    /* Modal styles */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -381,13 +382,15 @@
         showFaviconModal(getBigFaviconUrl(url), url);
       });
 
-      // Yeh line badli: span -> anchor tag
-      const span = document.createElement('a');
+      // Ab yeh span hai, anchor nahi
+      const span = document.createElement('span');
       span.className = 'site-url';
       span.textContent = url;
-      span.href = url;
-      span.target = '_blank';
-      span.rel = 'noopener noreferrer';
+      span.title = "Double click to open in new tab";
+      // Double click par open hoga
+      span.ondblclick = () => {
+        window.open(url, "_blank", "noopener,noreferrer");
+      };
 
       urlBox.appendChild(favicon);
       urlBox.appendChild(span);
