@@ -205,15 +205,19 @@
       background: #e8f5e9;
     }
 
-    .material-symbols-outlined {
-      font-size: 1.2em;
-    }
-
     .copy-btn.copied .material-symbols-outlined {
       color: #32c671;
     }
 
-    /* Modal styles */
+    .copy-btn.copied {
+      box-shadow: 0 0 0 2px #32c67177, 0 1px 4px rgba(80, 72, 229, 0.07);
+      border: 1.5px solid #32c671bb;
+    }
+
+    .material-symbols-outlined {
+      font-size: 1.2em;
+    }
+
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -319,7 +323,6 @@
         height: 16px;
       }
 
-      /* Make big favicon much larger on mobile */
       .big-favicon {
         width: 90vw !important;
         height: 90vw !important;
@@ -438,6 +441,9 @@
       "https://buy-fungosem.vercel.app/"
     ];
 
+    // Keep track of copied URLs (for this session, not permanent)
+    const copiedUrls = new Set();
+
     // Mode toggle
     let siteModeOn = false;
     const siteModeToggle = document.getElementById('siteModeToggle');
@@ -469,6 +475,13 @@
       const li = document.createElement('li');
       li.className = 'site-item';
 
+      // Double click anywhere on item to open url in new window
+      li.addEventListener('dblclick', function (e) {
+        // Prevent if double click is on copy button (to avoid opening when copy)
+        if (e.target.closest(".copy-btn")) return;
+        window.open(url, '_blank');
+      });
+
       const urlBox = document.createElement('div');
       urlBox.className = 'site-url-box';
 
@@ -485,7 +498,6 @@
       // WhatsApp style: show big icon on click
       favicon.style.cursor = "pointer";
       favicon.title = "Bada image dekhne ke liye click karo";
-
       favicon.addEventListener('click', function (e) {
         e.preventDefault();
         showFaviconModal(getBigFaviconUrl(url), url);
@@ -503,6 +515,11 @@
       btn.title = 'Copy URL';
       btn.innerHTML = `<span class="material-symbols-outlined">content_copy</span>`;
 
+      // If already copied in session, show effect
+      if (copiedUrls.has(url)) {
+        btn.classList.add("copied");
+        btn.title = "Copied!";
+      }
       btn.onclick = async () => {
         try {
           let copyText = url;
@@ -510,12 +527,9 @@
             copyText = `site:${url}`;
           }
           await navigator.clipboard.writeText(copyText);
+          copiedUrls.add(url); // Mark as copied
           btn.classList.add("copied");
           btn.title = "Copied!";
-          setTimeout(() => {
-            btn.classList.remove("copied");
-            btn.title = "Copy URL";
-          }, 1200);
         } catch (err) {
           alert("Copy failed! " + err);
         }
