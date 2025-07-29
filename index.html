@@ -26,6 +26,83 @@
       padding: 34px 20px 22px;
     }
 
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    /* Modern Switch Toggle */
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      user-select: none;
+      cursor: pointer;
+      color: #365cff;
+      background: #f5f7ff;
+      border-radius: 8px;
+      padding: 5px 14px 5px 8px;
+      box-shadow: 0 1px 4px rgba(80, 72, 229, 0.05);
+      transition: background 0.18s;
+    }
+
+    .switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      display: inline-block;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #c4d1fa;
+      transition: background 0.26s;
+      border-radius: 24px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 2px;
+      bottom: 2px;
+      background-color: #fff;
+      transition: transform 0.24s cubic-bezier(.55, 0, .1, 1);
+      border-radius: 50%;
+      box-shadow: 0 1px 3px #b3b3b355;
+    }
+
+    .switch input:checked+.slider {
+      background-color: #4F8CFF;
+    }
+
+    .switch input:checked+.slider:before {
+      transform: translateX(20px);
+      background-color: #fff;
+    }
+
+    .toggle-text {
+      font-weight: 500;
+      color: #2A3C6B;
+      letter-spacing: 0.3px;
+    }
+
     h2 {
       text-align: center;
       color: #1a5cff;
@@ -85,16 +162,6 @@
       box-shadow: 0 1px 4px rgba(80, 72, 229, 0.05);
       min-width: 0;
       flex: 1 1 auto;
-      text-decoration: underline;
-      cursor: pointer;
-      transition: background .2s, color .2s;
-      display: inline-block;
-      user-select: text;
-    }
-
-    .site-url:hover {
-      background: #e6eaff;
-      color: #1a5cff;
     }
 
     .copy-btn {
@@ -131,37 +198,7 @@
       color: #32c671;
     }
 
-    .tick-mark {
-      margin-left: 8px;
-      font-size: 1.5em;
-      color: #37c871;
-      vertical-align: middle;
-      display: none;
-    }
-
-    .site-item.copied .tick-mark {
-      display: inline;
-      animation: tickpop .18s cubic-bezier(0.5, 1.8, 0.6, 1.1);
-    }
-
-    @keyframes tickpop {
-      0% {
-        transform: scale(0.5);
-        opacity: 0;
-      }
-
-      80% {
-        transform: scale(1.15);
-        opacity: 1;
-      }
-
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    /* Modal styles (same as before) */
+    /* Modal styles */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -192,8 +229,6 @@
       min-height: 50px;
       flex-direction: column;
       align-items: center;
-      max-width: 95vw;
-      box-sizing: border-box;
     }
 
     .modal-img-box.active {
@@ -208,11 +243,6 @@
       background: #f7f7ff;
       object-fit: contain;
       box-shadow: 0 1.5px 6px #8882;
-      max-width: 80vw;
-      max-height: 40vh;
-      min-width: 48px;
-      min-height: 48px;
-      box-sizing: border-box;
     }
 
     .modal-url {
@@ -220,7 +250,6 @@
       color: #444;
       word-break: break-all;
       text-align: center;
-      max-width: 88vw;
     }
 
     .modal-close {
@@ -268,25 +297,31 @@
       }
 
       .big-favicon {
-        width: 60vw;
-        height: auto;
-        max-width: 90vw;
-        max-height: 30vh;
+        width: 72px;
+        height: 72px;
       }
 
       .modal-img-box {
-        padding: 14px 2vw 7px;
-      }
-    }
-
-    @media (max-width:400px) {
-      .modal-img-box {
-        padding: 9px 1vw 4px;
-        min-width: unset;
+        padding: 16px 6px 7px;
       }
 
-      .modal-url {
-        font-size: 0.89rem;
+      .top-bar {
+        margin-bottom: 10px;
+      }
+
+      .toggle-label {
+        font-size: 0.93rem;
+        padding: 5px 7px 5px 4px;
+      }
+
+      .switch {
+        width: 38px;
+        height: 20px;
+      }
+
+      .slider:before {
+        height: 16px;
+        width: 16px;
       }
     }
   </style>
@@ -295,6 +330,15 @@
 
 <body>
   <div class="container">
+    <div class="top-bar">
+      <label class="toggle-label" title="Agar ON hai to copy karte waqt site:[url] format me copy hoga.">
+        <span class="toggle-text">Dev Mode</span>
+        <span class="switch">
+          <input type="checkbox" id="siteModeToggle">
+          <span class="slider"></span>
+        </span>
+      </label>
+    </div>
     <h2>Meri Websites</h2>
     <ul class="site-list" id="siteList"></ul>
   </div>
@@ -368,6 +412,13 @@
       "https://buy-fungosem.vercel.app/"
     ];
 
+    // Mode toggle
+    let siteModeOn = false;
+    const siteModeToggle = document.getElementById('siteModeToggle');
+    siteModeToggle.addEventListener('change', function () {
+      siteModeOn = siteModeToggle.checked;
+    });
+
     // Chhota icon
     function getFaviconUrl(siteUrl) {
       try {
@@ -388,7 +439,6 @@
     }
     const DEFAULT_ICON = "data:image/svg+xml,%3Csvg width='128' height='128' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='128' height='128' fill='%23ddd'/%3E%3Ctext x='64' y='96' font-size='72' text-anchor='middle' fill='%23999'%3E🌐%3C/text%3E%3C/svg%3E";
     const siteList = document.getElementById('siteList');
-    let lastCopiedLi = null;
     websites.forEach(url => {
       const li = document.createElement('li');
       li.className = 'site-item';
@@ -406,6 +456,7 @@
         this.src = DEFAULT_ICON;
       };
 
+      // WhatsApp style: show big icon on click
       favicon.style.cursor = "pointer";
       favicon.title = "Bada image dekhne ke liye click karo";
 
@@ -414,24 +465,12 @@
         showFaviconModal(getBigFaviconUrl(url), url);
       });
 
-      // Site url span (double click to open)
       const span = document.createElement('span');
       span.className = 'site-url';
       span.textContent = url;
-      span.title = "Double click to open in new tab";
-      span.ondblclick = () => {
-        window.open(url, "_blank", "noopener,noreferrer");
-      };
-
-      // Tick mark (hidden by default)
-      const tick = document.createElement('span');
-      tick.className = 'tick-mark';
-      tick.title = "Copied!";
-      tick.innerHTML = "✔️";
 
       urlBox.appendChild(favicon);
       urlBox.appendChild(span);
-      urlBox.appendChild(tick);
 
       const btn = document.createElement('button');
       btn.className = 'copy-btn';
@@ -440,16 +479,13 @@
 
       btn.onclick = async () => {
         try {
-          await navigator.clipboard.writeText(url);
+          let copyText = url;
+          if (siteModeOn) {
+            copyText = `site:${url}`;
+          }
+          await navigator.clipboard.writeText(copyText);
           btn.classList.add("copied");
           btn.title = "Copied!";
-
-          if (lastCopiedLi && lastCopiedLi !== li) {
-            lastCopiedLi.classList.remove('copied');
-          }
-          li.classList.add('copied');
-          lastCopiedLi = li;
-
           setTimeout(() => {
             btn.classList.remove("copied");
             btn.title = "Copy URL";
