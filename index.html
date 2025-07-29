@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Meri Websites List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #4F8CFF 0%, #A46BFF 100%);
+      color: #222;
+      background-attachment: fixed;
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 500px;
+      width: 94%;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(80, 72, 229, 0.18), 0 1.5px 10px rgba(80,72,229,0.08);
+      padding: 34px 20px 22px;
+      transition: box-shadow 0.2s;
+    }
+    h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #1a5cff;
+      letter-spacing: 1px;
+      font-size: 1.7rem;
+      text-shadow: 0 1px 8px rgba(164, 107, 255, 0.07);
+    }
+    ul.site-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li.site-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid #eee;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    li.site-item:last-child { border-bottom: none; }
+    .site-url-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1 1 60%;
+    }
+    .site-favicon {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: #eee;
+      display: inline-block;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+    .site-url {
+      font-size: 1rem;
+      color: #333;
+      word-break: break-all;
+      background: #f7f7ff;
+      padding: 5px 12px;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(80,72,229,0.05);
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+    .copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      margin-left: 8px;
+      font-size: 1.5em;
+      color: #4A90E2;
+      display: flex;
+      align-items: center;
+      border-radius: 50%;
+      padding: 6px;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 4px rgba(80,72,229,0.07);
+      background: #f5f7ff;
+      min-width: 40px;
+      min-height: 40px;
+      justify-content: center;
+    }
+    .copy-btn:active,
+    .copy-btn.copied {
+      color: #32c671;
+      background: #e8f5e9;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 1.2em;
+      transition: color 0.2s;
+      user-select: none;
+    }
+    .copy-btn.copied .material-symbols-outlined {
+      color: #32c671;
+    }
+    @media (max-width: 600px) {
+      .container {
+        max-width: 99vw;
+        width: 99vw;
+        margin: 12px auto;
+        padding: 18px 4vw 12px;
+        border-radius: 10px;
+      }
+      h2 {
+        font-size: 1.3rem;
+      }
+      .site-url {
+        font-size: 0.97rem;
+        padding: 5px 6px;
+        border-radius: 6px;
+      }
+      .copy-btn {
+        font-size: 1.3em;
+        min-width: 34px;
+        min-height: 34px;
+        padding: 4px;
+      }
+      li.site-item {
+        padding: 9px 0;
+        gap: 5px;
+      }
+      .site-favicon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    @media (max-width: 400px) {
+      .container {
+        padding: 10px 2vw 7px;
+      }
+      h2 {
+        font-size: 1.1rem;
+      }
+      .site-url {
+        font-size: 0.89rem;
+        padding: 3px 2px;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <h2>Meri Websites</h2>
+    <ul class="site-list" id="siteList"></ul>
+  </div>
+  <script>
+    // Yahan aapki puri website list hai
+    const websites = [
+      "https://buyrestolin.vercel.app/",
+      "https://endopump.vercel.app/",
+      "https://burnboost.vercel.app/",
+      "https://pttrim-fatburn.vercel.app/",
+      "https://hairfortin.vercel.app/",
+      "https://buy-ocusil.vercel.app/",
+      "https://buy-mycosyn.vercel.app/",
+      "https://ikaria-lean-belly-juice.vercel.app/",
+      "https://get-livpure.vercel.app/",
+      "https://tupitea.vercel.app/",
+      "https://glucotru.vercel.app/",
+      "https://buy-tupitea.vercel.app/",
+      "https://metanail-complex.vercel.app/",
+      "https://cortexi.vercel.app/",
+      "https://buy-prodentim.vercel.app/",
+      "https://buy-redboost-supplement.vercel.app/",
+      "https://hydrossential.vercel.app/",
+      "https://fastleanpro.vercel.app/",
+      "https://claritox-pro.vercel.app/",
+      "https://kerassentials.vercel.app/",
+      "https://buyneurorise.vercel.app/",
+      "https://vivaslim.vercel.app/",
+      "https://buy-gorilla-flow.vercel.app/",
+      "https://foliprime.vercel.app/",
+      "https://get-neurorise.vercel.app/",
+      "https://buy-metabofix.vercel.app/",
+      "https://buy-slimcrystal.vercel.app/",
+      "https://metanail-serum-pro.vercel.app/",
+      "https://buy-biofit.vercel.app/",
+      "https://diabetes-solution-kit.vercel.app/",
+      "https://redboost-supplement.vercel.app/",
+      "https://keravita-pro.vercel.app/",
+      "https://get-prostadine.vercel.app/",
+      "https://buy-metaboflex.vercel.app/",
+      "https://biorestore-complete.vercel.app/",
+      "https://leanbelly3x.vercel.app/",
+      "https://today-offer-exipure.netlify.app/",
+      "https://circadiyin.vercel.app/",
+      "https://metaboflex.vercel.app/",
+      "https://buy-glucofort.vercel.app/",
+      "https://buy-cardio-shield.vercel.app/",
+      "https://buy-fortiprime.vercel.app/",
+      "https://all-day-slimming-tea.vercel.app/",
+      "https://beliv-supports-healthy-blood-sugar.vercel.app/",
+      "https://buy-visisoothe.vercel.app/",
+      "https://neurotonix.vercel.app/",
+      "https://get-glucotrust.vercel.app/",
+      "https://get-cortexi.vercel.app/",
+      "https://divinlocks.vercel.app/",
+      "https://promind-complex.vercel.app/",
+      "https://resurge-supplement.vercel.app/",
+      "https://buy-sonofit.vercel.app/",
+      "https://quietumplus.vercel.app/",
+      "https://postastream.vercel.app/",
+      "https://arterisplus.vercel.app/",
+      "https://bioplspro.vercel.app/",
+      "https://buy-actiflow.vercel.app/",
+      "https://alpha-xtra-boost.vercel.app/",
+      "https://get-terracalm.vercel.app/",
+      "https://buy-fungosem.vercel.app/"
+    ];
+
+    function getFaviconUrl(siteUrl) {
+      // Try Google S2 first, fallback to direct /favicon.ico
+      try {
+        const url = new URL(siteUrl);
+        return `https://www.google.com/s2/favicons?sz=64&domain=${url.hostname}`;
+      } catch {
+        return '';
+      }
+    }
+
+    const siteList = document.getElementById('siteList');
+
+    websites.forEach(url => {
+      const li = document.createElement('li');
+      li.className = 'site-item';
+
+      // Favicon and URL box
+      const urlBox = document.createElement('div');
+      urlBox.className = 'site-url-box';
+
+      const favicon = document.createElement('img');
+      favicon.className = 'site-favicon';
+      favicon.src = getFaviconUrl(url);
+      favicon.alt = "icon";
+      favicon.loading = "lazy";
+      favicon.onerror = function() {
+        // Try fallback: direct favicon.ico
+        try {
+          const u = new URL(url);
+          this.onerror = null;
+          this.src = u.origin + "/favicon.ico";
+        } catch {
+          this.src = "https://www.google.com/s2/favicons?sz=64&domain=vercel.app";
+        }
+      };
+
+      const span = document.createElement('span');
+      span.className = 'site-url';
+      span.textContent = url;
+
+      urlBox.appendChild(favicon);
+      urlBox.appendChild(span);
+
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.title = 'Copy URL';
+      btn.innerHTML = `<span class="material-symbols-outlined">content_copy</span>`;
+
+      btn.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(url);
+          btn.classList.add("copied");
+          btn.title = "Copied!";
+          setTimeout(() => {
+            btn.classList.remove("copied");
+            btn.title = "Copy URL";
+          }, 1200);
+        } catch (err) {
+          alert("Copy failed! " + err);
+        }
+      };
+
+      li.appendChild(urlBox);
+      li.appendChild(btn);
+      siteList.appendChild(li);
+    });
+  </script>
+</body>
+</html>
