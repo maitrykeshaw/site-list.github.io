@@ -152,6 +152,8 @@
       min-height: 50px;
       flex-direction: column;
       align-items: center;
+      max-width: 95vw;
+      box-sizing: border-box;
     }
 
     .modal-img-box.active {
@@ -166,6 +168,11 @@
       background: #f7f7ff;
       object-fit: contain;
       box-shadow: 0 1.5px 6px #8882;
+      max-width: 80vw;
+      max-height: 40vh;
+      min-width: 48px;
+      min-height: 48px;
+      box-sizing: border-box;
     }
 
     .modal-url {
@@ -173,6 +180,7 @@
       color: #444;
       word-break: break-all;
       text-align: center;
+      max-width: 88vw;
     }
 
     .modal-close {
@@ -220,12 +228,25 @@
       }
 
       .big-favicon {
-        width: 72px;
-        height: 72px;
+        width: 60vw;
+        height: auto;
+        max-width: 90vw;
+        max-height: 30vh;
       }
 
       .modal-img-box {
-        padding: 16px 6px 7px;
+        padding: 14px 2vw 7px;
+      }
+    }
+
+    @media (max-width:400px) {
+      .modal-img-box {
+        padding: 9px 1vw 4px;
+        min-width: unset;
+      }
+
+      .modal-url {
+        font-size: 0.89rem;
       }
     }
   </style>
@@ -344,7 +365,6 @@
         this.src = DEFAULT_ICON;
       };
 
-      // WhatsApp style: show big icon on click
       favicon.style.cursor = "pointer";
       favicon.title = "Bada image dekhne ke liye click karo";
 
