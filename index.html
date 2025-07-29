@@ -138,6 +138,10 @@
       border-bottom: 1px solid #eee;
       gap: 8px;
       flex-wrap: wrap;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
 
     li.site-item:last-child {
@@ -461,6 +465,13 @@
     const siteModeToggle = document.getElementById('siteModeToggle');
     siteModeToggle.addEventListener('change', function () {
       siteModeOn = siteModeToggle.checked;
+    });
+
+    // Disable text selection and copy on site list
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('li.site-item, .site-url-box, .site-url').forEach(el => {
+        el.addEventListener('copy', function (e) { e.preventDefault(); });
+      });
     });
 
     // Chhota icon
