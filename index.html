@@ -131,6 +131,37 @@
       color: #32c671;
     }
 
+    .tick-mark {
+      margin-left: 8px;
+      font-size: 1.5em;
+      color: #37c871;
+      vertical-align: middle;
+      display: none;
+    }
+
+    .site-item.copied .tick-mark {
+      display: inline;
+      animation: tickpop .18s cubic-bezier(0.5, 1.8, 0.6, 1.1);
+    }
+
+    @keyframes tickpop {
+      0% {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      80% {
+        transform: scale(1.15);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* Modal styles (same as before) */
     .modal-backdrop {
       display: none;
       position: fixed;
@@ -357,6 +388,7 @@
     }
     const DEFAULT_ICON = "data:image/svg+xml,%3Csvg width='128' height='128' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='128' height='128' fill='%23ddd'/%3E%3Ctext x='64' y='96' font-size='72' text-anchor='middle' fill='%23999'%3E🌐%3C/text%3E%3C/svg%3E";
     const siteList = document.getElementById('siteList');
+    let lastCopiedLi = null;
     websites.forEach(url => {
       const li = document.createElement('li');
       li.className = 'site-item';
@@ -382,18 +414,24 @@
         showFaviconModal(getBigFaviconUrl(url), url);
       });
 
-      // Ab yeh span hai, anchor nahi
+      // Site url span (double click to open)
       const span = document.createElement('span');
       span.className = 'site-url';
       span.textContent = url;
       span.title = "Double click to open in new tab";
-      // Double click par open hoga
       span.ondblclick = () => {
         window.open(url, "_blank", "noopener,noreferrer");
       };
 
+      // Tick mark (hidden by default)
+      const tick = document.createElement('span');
+      tick.className = 'tick-mark';
+      tick.title = "Copied!";
+      tick.innerHTML = "✔️";
+
       urlBox.appendChild(favicon);
       urlBox.appendChild(span);
+      urlBox.appendChild(tick);
 
       const btn = document.createElement('button');
       btn.className = 'copy-btn';
@@ -405,6 +443,13 @@
           await navigator.clipboard.writeText(url);
           btn.classList.add("copied");
           btn.title = "Copied!";
+
+          if (lastCopiedLi && lastCopiedLi !== li) {
+            lastCopiedLi.classList.remove('copied');
+          }
+          li.classList.add('copied');
+          lastCopiedLi = li;
+
           setTimeout(() => {
             btn.classList.remove("copied");
             btn.title = "Copy URL";
