@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Meri Websites List</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+    @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
       background: linear-gradient(135deg, #4F8CFF 0%, #A46BFF 100%);
       color: #222;
-      background-attachment: fixed;
-      box-sizing: border-box;
+      margin: 0;
+      min-height: 100vh;
     }
+
     .container {
       max-width: 500px;
       width: 94%;
       margin: 40px auto;
       background: #fff;
       border-radius: 18px;
-      box-shadow: 0 8px 40px rgba(80, 72, 229, 0.18), 0 1.5px 10px rgba(80,72,229,0.08);
+      box-shadow: 0 8px 40px rgba(80, 72, 229, 0.18), 0 1.5px 10px rgba(80, 72, 229, 0.08);
       padding: 34px 20px 22px;
-      transition: box-shadow 0.2s;
     }
+
     h2 {
-      margin-top: 0;
       text-align: center;
       color: #1a5cff;
-      letter-spacing: 1px;
       font-size: 1.7rem;
-      text-shadow: 0 1px 8px rgba(164, 107, 255, 0.07);
     }
+
     ul.site-list {
       list-style: none;
       padding: 0;
       margin: 0;
     }
+
     li.site-item {
       display: flex;
       align-items: center;
@@ -48,7 +47,11 @@
       gap: 8px;
       flex-wrap: wrap;
     }
-    li.site-item:last-child { border-bottom: none; }
+
+    li.site-item:last-child {
+      border-bottom: none;
+    }
+
     .site-url-box {
       display: flex;
       align-items: center;
@@ -56,15 +59,22 @@
       min-width: 0;
       flex: 1 1 60%;
     }
+
     .site-favicon {
       width: 20px;
       height: 20px;
       border-radius: 4px;
       background: #eee;
-      display: inline-block;
       flex-shrink: 0;
       object-fit: contain;
+      cursor: pointer;
+      transition: box-shadow .2s;
     }
+
+    .site-favicon:hover {
+      box-shadow: 0 2px 12px #aaa;
+    }
+
     .site-url {
       font-size: 1rem;
       color: #333;
@@ -72,10 +82,11 @@
       background: #f7f7ff;
       padding: 5px 12px;
       border-radius: 8px;
-      box-shadow: 0 1px 4px rgba(80,72,229,0.05);
+      box-shadow: 0 1px 4px rgba(80, 72, 229, 0.05);
       min-width: 0;
       flex: 1 1 auto;
     }
+
     .copy-btn {
       background: none;
       border: none;
@@ -89,79 +100,150 @@
       border-radius: 50%;
       padding: 6px;
       transition: background 0.2s, color 0.2s;
-      box-shadow: 0 1px 4px rgba(80,72,229,0.07);
+      box-shadow: 0 1px 4px rgba(80, 72, 229, 0.07);
       background: #f5f7ff;
       min-width: 40px;
       min-height: 40px;
       justify-content: center;
     }
+
     .copy-btn:active,
     .copy-btn.copied {
       color: #32c671;
       background: #e8f5e9;
     }
+
     .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
       font-size: 1.2em;
-      transition: color 0.2s;
-      user-select: none;
     }
+
     .copy-btn.copied .material-symbols-outlined {
       color: #32c671;
     }
-    @media (max-width: 600px) {
+
+    /* Modal styles */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.32);
+    }
+
+    .modal-backdrop.active {
+      display: block;
+    }
+
+    .modal-img-box {
+      display: none;
+      position: fixed;
+      z-index: 1001;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 40px rgba(80, 72, 229, 0.18);
+      padding: 24px 18px 14px;
+      min-width: 150px;
+      min-height: 50px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-img-box.active {
+      display: flex;
+    }
+
+    .big-favicon {
+      width: 128px;
+      height: 128px;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      background: #f7f7ff;
+      object-fit: contain;
+      box-shadow: 0 1.5px 6px #8882;
+    }
+
+    .modal-url {
+      font-size: 0.97rem;
+      color: #444;
+      word-break: break-all;
+      text-align: center;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 7px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 1.7rem;
+      color: #888;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    @media(max-width:600px) {
       .container {
         max-width: 99vw;
         width: 99vw;
         margin: 12px auto;
         padding: 18px 4vw 12px;
-        border-radius: 10px;
       }
+
       h2 {
         font-size: 1.3rem;
       }
+
       .site-url {
         font-size: 0.97rem;
-        padding: 5px 6px;
-        border-radius: 6px;
       }
+
       .copy-btn {
         font-size: 1.3em;
         min-width: 34px;
         min-height: 34px;
         padding: 4px;
       }
+
       li.site-item {
         padding: 9px 0;
-        gap: 5px;
       }
+
       .site-favicon {
         width: 16px;
         height: 16px;
       }
-    }
-    @media (max-width: 400px) {
-      .container {
-        padding: 10px 2vw 7px;
+
+      .big-favicon {
+        width: 72px;
+        height: 72px;
       }
-      h2 {
-        font-size: 1.1rem;
-      }
-      .site-url {
-        font-size: 0.89rem;
-        padding: 3px 2px;
+
+      .modal-img-box {
+        padding: 16px 6px 7px;
       }
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
+
 <body>
   <div class="container">
     <h2>Meri Websites</h2>
     <ul class="site-list" id="siteList"></ul>
   </div>
+  <div id="modalBackdrop" class="modal-backdrop"></div>
+  <div id="modalImgBox" class="modal-img-box">
+    <button class="modal-close" id="modalCloseBtn" title="Close">&times;</button>
+    <img id="bigFavicon" class="big-favicon" src="" alt="Favicon" />
+    <div class="modal-url" id="modalUrl"></div>
+  </div>
   <script>
-    // Yahan aapki puri website list hai
     const websites = [
       "https://buyrestolin.vercel.app/",
       "https://endopump.vercel.app/",
@@ -225,23 +307,30 @@
       "https://buy-fungosem.vercel.app/"
     ];
 
+    // Chhota icon
     function getFaviconUrl(siteUrl) {
-      // Try Google S2 first, fallback to direct /favicon.ico
       try {
         const url = new URL(siteUrl);
-        return `https://www.google.com/s2/favicons?sz=64&domain=${url.hostname}`;
+        return url.origin + "/icons/favicon.ico";
       } catch {
-        return '';
+        return "";
       }
     }
-
+    // Bada icon
+    function getBigFaviconUrl(siteUrl) {
+      try {
+        const url = new URL(siteUrl);
+        return url.origin + "/icons/favicon-512x512.png";
+      } catch {
+        return "";
+      }
+    }
+    const DEFAULT_ICON = "data:image/svg+xml,%3Csvg width='128' height='128' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='128' height='128' fill='%23ddd'/%3E%3Ctext x='64' y='96' font-size='72' text-anchor='middle' fill='%23999'%3E🌐%3C/text%3E%3C/svg%3E";
     const siteList = document.getElementById('siteList');
-
     websites.forEach(url => {
       const li = document.createElement('li');
       li.className = 'site-item';
 
-      // Favicon and URL box
       const urlBox = document.createElement('div');
       urlBox.className = 'site-url-box';
 
@@ -250,16 +339,19 @@
       favicon.src = getFaviconUrl(url);
       favicon.alt = "icon";
       favicon.loading = "lazy";
-      favicon.onerror = function() {
-        // Try fallback: direct favicon.ico
-        try {
-          const u = new URL(url);
-          this.onerror = null;
-          this.src = u.origin + "/favicon.ico";
-        } catch {
-          this.src = "https://www.google.com/s2/favicons?sz=64&domain=vercel.app";
-        }
+      favicon.onerror = function () {
+        this.onerror = null;
+        this.src = DEFAULT_ICON;
       };
+
+      // WhatsApp style: show big icon on click
+      favicon.style.cursor = "pointer";
+      favicon.title = "Bada image dekhne ke liye click karo";
+
+      favicon.addEventListener('click', function (e) {
+        e.preventDefault();
+        showFaviconModal(getBigFaviconUrl(url), url);
+      });
 
       const span = document.createElement('span');
       span.className = 'site-url';
@@ -291,6 +383,32 @@
       li.appendChild(btn);
       siteList.appendChild(li);
     });
+
+    // Modal logic
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const modalBox = document.getElementById('modalImgBox');
+    const modalImg = document.getElementById('bigFavicon');
+    const modalUrl = document.getElementById('modalUrl');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+    function showFaviconModal(imgUrl, siteUrl) {
+      modalImg.src = imgUrl;
+      modalImg.onerror = function () { this.onerror = null; this.src = DEFAULT_ICON; }
+      modalUrl.textContent = siteUrl;
+      modalBackdrop.classList.add('active');
+      modalBox.classList.add('active');
+      setTimeout(() => { modalBox.focus?.(); }, 50);
+    }
+    function closeModal() {
+      modalBackdrop.classList.remove('active');
+      modalBox.classList.remove('active');
+    }
+    modalBackdrop.onclick = closeModal;
+    modalCloseBtn.onclick = closeModal;
+    document.addEventListener('keydown', function (e) {
+      if (modalBox.classList.contains('active') && (e.key === "Escape" || e.key === "Esc")) closeModal();
+    });
   </script>
 </body>
+
 </html>
