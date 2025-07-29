@@ -85,6 +85,14 @@
       box-shadow: 0 1px 4px rgba(80, 72, 229, 0.05);
       min-width: 0;
       flex: 1 1 auto;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+      display: inline-block;
+    }
+
+    .site-url:hover {
+      background: #e6eaff;
+      color: #1a5cff;
     }
 
     .copy-btn {
@@ -373,9 +381,13 @@
         showFaviconModal(getBigFaviconUrl(url), url);
       });
 
-      const span = document.createElement('span');
+      // Yeh line badli: span -> anchor tag
+      const span = document.createElement('a');
       span.className = 'site-url';
       span.textContent = url;
+      span.href = url;
+      span.target = '_blank';
+      span.rel = 'noopener noreferrer';
 
       urlBox.appendChild(favicon);
       urlBox.appendChild(span);
