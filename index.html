@@ -214,6 +214,18 @@
       border: 1.5px solid #32c671bb;
     }
 
+    /* Dev Mode Copied Button Color */
+    .copy-btn.dev-copied {
+      color: #ff8c00 !important;
+      background: #fff5e1 !important;
+      border: 1.5px solid #ff8c00bb !important;
+      box-shadow: 0 0 0 2px #ffad3b55, 0 1px 4px rgba(80, 72, 229, 0.07);
+    }
+
+    .copy-btn.dev-copied .material-symbols-outlined {
+      color: #ff8c00 !important;
+    }
+
     .material-symbols-outlined {
       font-size: 1.2em;
     }
@@ -441,8 +453,8 @@
       "https://buy-fungosem.vercel.app/"
     ];
 
-    // Keep track of copied URLs (for this session, not permanent)
-    const copiedUrls = new Set();
+    // Keep track of copied URLs and their copy mode (normal/dev)
+    const copiedUrls = new Map();
 
     // Mode toggle
     let siteModeOn = false;
@@ -477,7 +489,6 @@
 
       // Double click anywhere on item to open url in new window
       li.addEventListener('dblclick', function (e) {
-        // Prevent if double click is on copy button (to avoid opening when copy)
         if (e.target.closest(".copy-btn")) return;
         window.open(url, '_blank');
       });
@@ -495,7 +506,6 @@
         this.src = DEFAULT_ICON;
       };
 
-      // WhatsApp style: show big icon on click
       favicon.style.cursor = "pointer";
       favicon.title = "Bada image dekhne ke liye click karo";
       favicon.addEventListener('click', function (e) {
@@ -515,21 +525,36 @@
       btn.title = 'Copy URL';
       btn.innerHTML = `<span class="material-symbols-outlined">content_copy</span>`;
 
-      // If already copied in session, show effect
+      // Show effect if already copied, and which mode
       if (copiedUrls.has(url)) {
-        btn.classList.add("copied");
-        btn.title = "Copied!";
+        if (copiedUrls.get(url) === "dev") {
+          btn.classList.add("dev-copied");
+          btn.title = "Copied as site:[url]!";
+        } else {
+          btn.classList.add("copied");
+          btn.title = "Copied!";
+        }
       }
+
       btn.onclick = async () => {
         try {
           let copyText = url;
-          if (siteModeOn) {
+          let isDevMode = siteModeOn;
+          if (isDevMode) {
             copyText = `site:${url}`;
           }
           await navigator.clipboard.writeText(copyText);
-          copiedUrls.add(url); // Mark as copied
-          btn.classList.add("copied");
-          btn.title = "Copied!";
+          copiedUrls.set(url, isDevMode ? "dev" : "normal");
+          // Remove all effect classes first
+          btn.classList.remove("copied", "dev-copied");
+          // Add the correct one
+          if (isDevMode) {
+            btn.classList.add("dev-copied");
+            btn.title = "Copied as site:[url]!";
+          } else {
+            btn.classList.add("copied");
+            btn.title = "Copied!";
+          }
         } catch (err) {
           alert("Copy failed! " + err);
         }
