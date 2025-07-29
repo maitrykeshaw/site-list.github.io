@@ -24,14 +24,36 @@
       border-radius: 18px;
       box-shadow: 0 8px 40px rgba(80, 72, 229, 0.18), 0 1.5px 10px rgba(80, 72, 229, 0.08);
       padding: 34px 20px 22px;
+      position: relative;
     }
 
-    .top-bar {
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      border-radius: 18px 18px 0 0;
+      box-shadow: 0 2px 14px rgba(80, 72, 229, 0.04);
+    }
+
+    h2 {
+      text-align: center;
+      color: #1a5cff;
+      font-size: 1.7rem;
+      margin: 0 0 10px 0;
+      padding: 0;
+      background: transparent;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .toggle-row {
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-bottom: 18px;
+      margin-bottom: 10px;
     }
 
     /* Modern Switch Toggle */
@@ -101,12 +123,6 @@
       font-weight: 500;
       color: #2A3C6B;
       letter-spacing: 0.3px;
-    }
-
-    h2 {
-      text-align: center;
-      color: #1a5cff;
-      font-size: 1.7rem;
     }
 
     ul.site-list {
@@ -272,6 +288,11 @@
         padding: 18px 4vw 12px;
       }
 
+      .sticky-header {
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+
       h2 {
         font-size: 1.3rem;
       }
@@ -305,10 +326,6 @@
         padding: 16px 6px 7px;
       }
 
-      .top-bar {
-        margin-bottom: 10px;
-      }
-
       .toggle-label {
         font-size: 0.93rem;
         padding: 5px 7px 5px 4px;
@@ -330,16 +347,18 @@
 
 <body>
   <div class="container">
-    <div class="top-bar">
-      <label class="toggle-label" title="Agar ON hai to copy karte waqt site:[url] format me copy hoga.">
-        <span class="toggle-text">Dev Mode</span>
-        <span class="switch">
-          <input type="checkbox" id="siteModeToggle">
-          <span class="slider"></span>
-        </span>
-      </label>
+    <div class="sticky-header">
+      <h2>Meri Websites</h2>
+      <div class="toggle-row">
+        <label class="toggle-label" title="Agar ON hai to copy karte waqt site:[url] format me copy hoga.">
+          <span class="toggle-text">Dev Mode</span>
+          <span class="switch">
+            <input type="checkbox" id="siteModeToggle">
+            <span class="slider"></span>
+          </span>
+        </label>
+      </div>
     </div>
-    <h2>Meri Websites</h2>
     <ul class="site-list" id="siteList"></ul>
   </div>
   <div id="modalBackdrop" class="modal-backdrop"></div>
