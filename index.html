@@ -6,6 +6,7 @@
   <title>Meri Websites List</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
+    /* ----------- Desktop Styles ----------- */
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
       background: linear-gradient(135deg, #4F8CFF 0%, #A46BFF 100%);
@@ -72,8 +73,8 @@
       position: fixed;
       top: 0;
       left: -280px;
-      width: 70vw;
-      max-width: 96vw;
+      width: 260px;
+      max-width: 94vw;
       height: 100vh;
       background: #fff;
       box-shadow: 3px 0 22px #8883;
@@ -236,16 +237,10 @@
       color: #1a5cff;
     }
 
-    .drawer-divider {
-      border: none;
-      border-top: 1.5px solid #ececec;
-      margin: 12px 0 12px 0;
-    }
-
     /* ----------- Mobile Styles ----------- */
     @media(max-width: 900px) {
       .side-drawer {
-        width: 70vw;
+        width: 80vw;
         max-width: 96vw;
       }
     }
@@ -259,8 +254,8 @@
       }
 
       .side-drawer {
-        width: 70vw;
-        left: -70vw;
+        width: 98vw;
+        left: -100vw;
         min-width: 110px;
         box-shadow: 1px 0 12px #8883;
       }
@@ -307,12 +302,9 @@
         font-size: 1rem;
         padding: 10px 10px 10px 18px;
       }
-
-      .drawer-divider {
-        margin: 8px 0 8px 0;
-      }
     }
 
+    /* ----------- Rest styles unchanged ----------- */
     .container {
       max-width: 500px;
       width: 94%;
@@ -696,7 +688,7 @@
       <button class="drawer-close" id="drawerCloseBtn" title="Close menu">&times;</button>
     </div>
     <div class="drawer-content">
-      <!-- Toggles with divider and gap -->
+      <!-- Toggles RIGHT ALIGNED -->
       <div class="drawer-section drawer-toggles">
         <label class="drawer-toggle-label" for="checkIndexToggle">
           <span>
@@ -707,7 +699,6 @@
             <span class="drawer-slider"></span>
           </span>
         </label>
-        <hr class="drawer-divider">
         <label class="drawer-toggle-label" for="gSearchToggle">
           <span>
             <img src="https://www.google.com/favicon.ico" alt="Google Icon" class="drawer-icon" width="20"
