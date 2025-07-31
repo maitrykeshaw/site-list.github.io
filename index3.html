@@ -16,267 +16,6 @@
       min-height: 100vh;
     }
 
-    .hamburger {
-      position: fixed;
-      top: 18px;
-      left: 18px;
-      z-index: 2002;
-      width: 44px;
-      height: 44px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 14px rgba(80, 72, 229, 0.10);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.22s;
-      border: none;
-    }
-
-    .hamburger:hover {
-      background: #f7f7ff;
-    }
-
-    .hamburger-lines {
-      width: 26px;
-      height: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .hamburger-line {
-      height: 4px;
-      width: 100%;
-      background: #4F8CFF;
-      border-radius: 2px;
-      transition: all 0.25s;
-    }
-
-    .menu-backdrop {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(48, 54, 85, 0.19);
-      z-index: 2500;
-      transition: background 0.2s;
-    }
-
-    .menu-backdrop.active {
-      display: block;
-    }
-
-    .side-drawer {
-      position: fixed;
-      top: 0;
-      left: -280px;
-      width: 260px;
-      max-width: 94vw;
-      height: 100vh;
-      background: #fff;
-      box-shadow: 3px 0 22px #8883;
-      z-index: 2501;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      transition: left 0.33s cubic-bezier(.7, .3, .3, 1.1);
-      touch-action: manipulation;
-    }
-
-    .side-drawer.active {
-      left: 0;
-    }
-
-    .drawer-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px 16px 12px 22px;
-      border-bottom: 1px solid #f0f0fa;
-      min-height: 62px;
-    }
-
-    .drawer-title {
-      font-size: 1.18rem;
-      font-weight: 600;
-      color: #365cff;
-      letter-spacing: 0.2px;
-    }
-
-    .drawer-close {
-      background: none;
-      border: none;
-      font-size: 2rem;
-      color: #888;
-      cursor: pointer;
-      line-height: 1;
-      padding: 2px 3px;
-      border-radius: 50%;
-      transition: background 0.13s;
-    }
-
-    .drawer-close:hover {
-      background: #f5f7ff;
-    }
-
-    .drawer-content {
-      flex: 1 1 auto;
-      overflow-y: auto;
-      padding: 16px 0 0 0;
-    }
-
-    .drawer-section {
-      margin-bottom: 20px;
-    }
-
-    .drawer-toggles {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 18px;
-      margin-left: 18px;
-    }
-
-    .drawer-toggle-label {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0;
-      padding-right: 10px;
-      font-size: 1.06rem;
-      color: #2A3C6B;
-      font-weight: 500;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .drawer-toggle-label span:first-child {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .drawer-icon {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      margin-right: 4px;
-    }
-
-    .drawer-switch {
-      position: relative;
-      width: 38px;
-      height: 20px;
-      display: inline-block;
-      margin-left: 18px;
-    }
-
-    .drawer-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .drawer-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #c4d1fa;
-      transition: background 0.26s;
-      border-radius: 16px;
-    }
-
-    .drawer-slider:before {
-      position: absolute;
-      content: "";
-      height: 16px;
-      width: 16px;
-      left: 2px;
-      bottom: 2px;
-      background-color: #fff;
-      transition: transform 0.22s cubic-bezier(.55, 0, .1, 1);
-      border-radius: 50%;
-      box-shadow: 0 1px 2px #b3b3b355;
-    }
-
-    .drawer-switch input:checked+.drawer-slider {
-      background-color: #4F8CFF;
-    }
-
-    .drawer-switch input:checked+.drawer-slider:before {
-      transform: translateX(18px);
-    }
-
-    .drawer-menu-items {
-      display: flex;
-      flex-direction: column;
-      margin: 6px 0 0 0;
-    }
-
-    .drawer-menu-item {
-      font-size: 1.09rem;
-      padding: 13px 24px 13px 36px;
-      color: #365cff;
-      background: none;
-      border: none;
-      outline: none;
-      text-align: left;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: background 0.16s, color 0.18s;
-      margin: 3px 0;
-    }
-
-    .drawer-menu-item:hover {
-      background: #f6f8ff;
-      color: #1a5cff;
-    }
-
-    @media(max-width: 900px) {
-      .side-drawer {
-        width: 70vw;
-        max-width: 96vw;
-      }
-    }
-
-    @media(max-width: 600px) {
-      .hamburger {
-        top: 6px;
-        left: 6px;
-        width: 38px;
-        height: 38px;
-      }
-
-      .side-drawer {
-        width: 93vw;
-        min-width: 110px;
-      }
-
-      .drawer-header {
-        padding: 11px 8px 7px 12px;
-      }
-
-      .drawer-toggles {
-        margin-left: 8px;
-      }
-
-      .drawer-title {
-        font-size: 1rem;
-      }
-
-      .drawer-menu-item {
-        font-size: 1rem;
-        padding-left: 20px;
-      }
-    }
-
     .container {
       max-width: 500px;
       width: 94%;
@@ -644,63 +383,6 @@
 </head>
 
 <body>
-  <!-- Hamburger -->
-  <button class="hamburger" id="hamburgerMenuBtn" aria-label="Open menu">
-    <span class="hamburger-lines">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </span>
-  </button>
-  <!-- Drawer menu -->
-  <div class="menu-backdrop" id="menuBackdrop"></div>
-  <nav class="side-drawer" id="sideDrawer" aria-label="Main menu">
-    <div class="drawer-header">
-      <div class="drawer-title">Menu</div>
-      <button class="drawer-close" id="drawerCloseBtn" title="Close menu">&times;</button>
-    </div>
-    <div class="drawer-content">
-      <!-- Toggles RIGHT ALIGNED -->
-      <div class="drawer-section drawer-toggles">
-        <label class="drawer-toggle-label" for="checkIndexToggle">
-          <span>
-            Check Index
-          </span>
-          <span class="drawer-switch">
-            <input type="checkbox" id="checkIndexToggle">
-            <span class="drawer-slider"></span>
-          </span>
-        </label>
-        <label class="drawer-toggle-label" for="gSearchToggle">
-          <span>
-            <img src="https://www.google.com/favicon.ico" alt="Google Icon" class="drawer-icon" width="20"
-              height="20" />
-            G Search
-          </span>
-          <span class="drawer-switch">
-            <input type="checkbox" id="gSearchToggle">
-            <span class="drawer-slider"></span>
-          </span>
-        </label>
-        <label class="drawer-toggle-label" for="bSearchToggle">
-          <span>
-            <img src="https://www.bing.com/favicon.ico" alt="Bing Icon" class="drawer-icon" width="20" height="20" />
-            B Search
-          </span>
-          <span class="drawer-switch">
-            <input type="checkbox" id="bSearchToggle">
-            <span class="drawer-slider"></span>
-          </span>
-        </label>
-      </div>
-      <div class="drawer-section drawer-menu-items">
-        <button class="drawer-menu-item" onclick="window.scrollTo(0,0)">Home</button>
-        <button class="drawer-menu-item" onclick="alert('Yeh ek demo About hai!')">About</button>
-        <button class="drawer-menu-item" onclick="alert('Contact: aapka-email@yahan.com')">Contact</button>
-        <button class="drawer-menu-item" onclick="window.open('https://vercel.com/', '_blank')">Vercel</button>
-      </div>
-    </div>
-  </nav>
   <div class="container">
     <div class="sticky-header">
       <h2>Meri Websites</h2>
@@ -715,6 +397,7 @@
       </div>
     </div>
     <ul class="site-list" id="siteList"></ul>
+
     <h2 class="under-building-title">Under Building</h2>
     <ul class="site-list" id="underBuildingList"></ul>
   </div>
@@ -725,47 +408,6 @@
     <div class="modal-url" id="modalUrl"></div>
   </div>
   <script>
-    // --- Drawer Menu Logic ---
-    const hamburgerBtn = document.getElementById('hamburgerMenuBtn');
-    const sideDrawer = document.getElementById('sideDrawer');
-    const menuBackdrop = document.getElementById('menuBackdrop');
-    const drawerCloseBtn = document.getElementById('drawerCloseBtn');
-    function openDrawer() {
-      sideDrawer.classList.add('active');
-      menuBackdrop.classList.add('active');
-      setTimeout(() => { sideDrawer.focus?.() }, 80);
-    }
-    function closeDrawer() {
-      sideDrawer.classList.remove('active');
-      menuBackdrop.classList.remove('active');
-    }
-    hamburgerBtn.onclick = openDrawer;
-    menuBackdrop.onclick = closeDrawer;
-    drawerCloseBtn.onclick = closeDrawer;
-    document.addEventListener('keydown', function (e) {
-      if (sideDrawer.classList.contains('active') && (e.key === "Escape" || e.key === "Esc")) closeDrawer();
-    });
-
-    // --- Toggle logic: only one ON at a time, both can be OFF ---
-    const checkIndexToggle = document.getElementById('checkIndexToggle');
-    checkIndexToggle.checked = false;
-    const gSearchToggle = document.getElementById('gSearchToggle');
-    const bSearchToggle = document.getElementById('bSearchToggle');
-    gSearchToggle.checked = false;
-    bSearchToggle.checked = false;
-
-    function exclusiveToggle(e) {
-      if (e.target.checked) {
-        if (e.target === gSearchToggle) {
-          bSearchToggle.checked = false;
-        } else if (e.target === bSearchToggle) {
-          gSearchToggle.checked = false;
-        }
-      }
-    }
-    gSearchToggle.addEventListener('change', exclusiveToggle);
-    bSearchToggle.addEventListener('change', exclusiveToggle);
-
     // ---- Your working sites ----
     const websites = [
       "https://buyrestolin.vercel.app/",
@@ -830,6 +472,7 @@
       "https://buy-fungosem.vercel.app/"
     ];
 
+    // ---- Your under building sites ----
     const underBuildingSites = [
       "https://balmorex-pro.vercel.app/",
       "https://breathe-lungreset.vercel.app/",
@@ -851,13 +494,17 @@
       "https://yusleep.vercel.app/"
     ];
 
+    // Keep track of copied URLs and their copy mode (normal/dev)
     const copiedUrls = new Map();
+
+    // Mode toggle
     let siteModeOn = false;
     const siteModeToggle = document.getElementById('siteModeToggle');
     siteModeToggle.addEventListener('change', function () {
       siteModeOn = siteModeToggle.checked;
     });
 
+    // Disable text selection and copy on site list
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('li.site-item, .site-url-box, .site-url').forEach(el => {
         el.addEventListener('copy', function (e) { e.preventDefault(); });
@@ -887,6 +534,7 @@
         const li = document.createElement('li');
         li.className = 'site-item';
 
+        // Double click to open new tab
         li.addEventListener('dblclick', function (e) {
           if (e.target.closest(".copy-btn")) return;
           window.open(url, '_blank');
@@ -921,7 +569,41 @@
 
         const btn = document.createElement('button');
         btn.className = 'copy-btn';
+        btn.title = 'Copy URL';
         btn.innerHTML = `<span class="material-symbols-outlined">content_copy</span>`;
+
+        // Show effect if already copied, and which mode
+        if (copiedUrls.has(url)) {
+          if (copiedUrls.get(url) === "dev") {
+            btn.classList.add("dev-copied");
+            btn.title = "Copied as site:[url]!";
+          } else {
+            btn.classList.add("copied");
+            btn.title = "Copied!";
+          }
+        }
+
+        btn.onclick = async () => {
+          try {
+            let copyText = url;
+            let isDevMode = siteModeOn;
+            if (isDevMode) {
+              copyText = `site:${url}`;
+            }
+            await navigator.clipboard.writeText(copyText);
+            copiedUrls.set(url, isDevMode ? "dev" : "normal");
+            btn.classList.remove("copied", "dev-copied");
+            if (isDevMode) {
+              btn.classList.add("dev-copied");
+              btn.title = "Copied as site:[url]!";
+            } else {
+              btn.classList.add("copied");
+              btn.title = "Copied!";
+            }
+          } catch (err) {
+            alert("Copy failed! " + err);
+          }
+        };
 
         li.appendChild(urlBox);
         li.appendChild(btn);
@@ -929,9 +611,12 @@
       });
     }
 
+    // Add working sites to first list
     addSitesToList(websites, document.getElementById('siteList'));
+    // Add under building sites to second list
     addSitesToList(underBuildingSites, document.getElementById('underBuildingList'));
 
+    // Modal logic (same as before)
     const modalBackdrop = document.getElementById('modalBackdrop');
     const modalBox = document.getElementById('modalImgBox');
     const modalImg = document.getElementById('bigFavicon');
@@ -955,79 +640,6 @@
     document.addEventListener('keydown', function (e) {
       if (modalBox.classList.contains('active') && (e.key === "Escape" || e.key === "Esc")) closeModal();
     });
-
-    // --------- BUTTON BEHAVIOR/ICON DYNAMIC WITH CHECK INDEX ---------
-    function updateAllSiteButtons() {
-      document.querySelectorAll('.site-item').forEach(function (li) {
-        const btn = li.querySelector('.copy-btn');
-        if (!btn) return;
-        const url = li.querySelector('.site-url')?.textContent?.trim();
-        if (!url) return;
-
-        btn.onclick = null;
-
-        function updateBtnIcon() {
-          const iconSpan = btn.querySelector('.material-symbols-outlined');
-          const gTog = document.getElementById('gSearchToggle');
-          const bTog = document.getElementById('bSearchToggle');
-          if (gTog?.checked || bTog?.checked) {
-            iconSpan.textContent = "open_in_new";
-            if (gTog?.checked) {
-              btn.title = "Google Me Search Karo";
-            } else if (bTog?.checked) {
-              btn.title = "Bing Me Search Karo";
-            }
-          } else {
-            iconSpan.textContent = "content_copy";
-            btn.title = "Copy URL";
-          }
-        }
-
-        btn.onclick = function (e) {
-          const gTog = document.getElementById('gSearchToggle');
-          const bTog = document.getElementById('bSearchToggle');
-          const checkTog = document.getElementById('checkIndexToggle');
-
-          // G/B Search ON hai
-          if (gTog?.checked) {
-            let searchQ = checkTog?.checked ? `site:${url}` : url;
-            const googleUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQ)}`;
-            window.open(googleUrl, '_blank');
-          } else if (bTog?.checked) {
-            let searchQ = checkTog?.checked ? `site:${url}` : url;
-            const bingUrl = `https://www.bing.com/search?q=${encodeURIComponent(searchQ)}`;
-            window.open(bingUrl, '_blank');
-          } else {
-            // Copy
-            let isDevMode = document.getElementById('siteModeToggle')?.checked;
-            let copyText = isDevMode ? `site:${url}` : url;
-            navigator.clipboard.writeText(copyText).then(() => {
-              btn.classList.remove("copied", "dev-copied");
-              if (isDevMode) {
-                btn.classList.add("dev-copied");
-                btn.title = "Copied as site:[url]!";
-              } else {
-                btn.classList.add("copied");
-                btn.title = "Copied!";
-              }
-              const iconSpan = btn.querySelector('.material-symbols-outlined');
-              iconSpan.textContent = 'done';
-              setTimeout(() => {
-                updateBtnIcon();
-              }, 1200);
-            });
-          }
-        };
-
-        document.getElementById('gSearchToggle')?.addEventListener('change', updateBtnIcon);
-        document.getElementById('bSearchToggle')?.addEventListener('change', updateBtnIcon);
-        document.getElementById('checkIndexToggle')?.addEventListener('change', updateBtnIcon);
-
-        updateBtnIcon();
-      });
-    }
-    document.addEventListener('DOMContentLoaded', updateAllSiteButtons);
-    window.updateAllSiteButtons = updateAllSiteButtons;
   </script>
 </body>
 
