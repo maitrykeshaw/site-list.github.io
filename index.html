@@ -131,11 +131,33 @@
       margin-bottom: 20px;
     }
 
+    /* ==== NEW: Drawer Section Separation for Check Index ==== */
+    .drawer-section--check-index {
+      border-bottom: 1.5px solid #f0f0fa;
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      margin-top: 8px;
+    }
+
+    .drawer-section--search-toggles {
+      margin-bottom: 18px;
+    }
+
+    @media(max-width: 600px) {
+      .drawer-section--check-index {
+        margin-bottom: 16px;
+        padding-bottom: 7px;
+        margin-top: 2px;
+      }
+    }
+
+    /* ==== END NEW ==== */
+
     .drawer-toggles {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 18px;
+      /* margin-bottom: 18px; */
       margin-left: 18px;
     }
 
@@ -688,8 +710,8 @@
       <button class="drawer-close" id="drawerCloseBtn" title="Close menu">&times;</button>
     </div>
     <div class="drawer-content">
-      <!-- Toggles RIGHT ALIGNED -->
-      <div class="drawer-section drawer-toggles">
+      <!-- ===== Check Index: Separate Section with Border & Gap ===== -->
+      <div class="drawer-section drawer-section--check-index">
         <label class="drawer-toggle-label" for="checkIndexToggle">
           <span>
             Check Index
@@ -699,6 +721,9 @@
             <span class="drawer-slider"></span>
           </span>
         </label>
+      </div>
+      <!-- ===== G/B Search: Below with Gap ===== -->
+      <div class="drawer-section drawer-section--search-toggles drawer-toggles">
         <label class="drawer-toggle-label" for="gSearchToggle">
           <span>
             <img src="https://www.google.com/favicon.ico" alt="Google Icon" class="drawer-icon" width="20"
